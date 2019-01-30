@@ -8,6 +8,7 @@
                #:dexador
                #:cl-base64
                #:cl-ppcre)
-  :components ((:file "package")
+  :components ((:file "id")
+               (:file "package")
                (:file "tokens")
                (:file "lispotify")))
