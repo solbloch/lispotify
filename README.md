@@ -1,5 +1,5 @@
 # lispotify
-### _sol b_
+### _sol bloch_
 
 This is a project to use spotify.
 
