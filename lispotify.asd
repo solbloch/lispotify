@@ -5,10 +5,12 @@
   :version "0.0.1"
   :serial t
   :depends-on (#:jsown
+               #:quri
                #:dexador
                #:cl-base64
                #:cl-ppcre)
-  :components ((:file "id")
-               (:file "package")
+  :components ((:file "package")
+               (:file "id")
                (:file "tokens")
-               (:file "lispotify")))
+               (:file "lispotify")
+               (:file "dbus")))
