@@ -26,4 +26,24 @@ then use whatever `(search-track "dfj")` and parse it (it gives back a list of j
                               (loop for artist in (jsown:val i "artists")
                                     collecting (jsown:val artist "name"))))
         ,(jsown:val i "uri")))
+        
+        
+(("What's Going On - Live Version - Donny Hathaway"
+  "spotify:track:1QQgtnvXfArwOCq7zYSE5g")
+ ("What's Going On - Donny Hathaway" "spotify:track:2kXshT838nizb8yB8a2TuD")
+ ("What's Going On - Live @ the Troubadour, Hollywood CA - Donny Hathaway"
+  "spotify:track:1zSgozTCF928FD2IKThfMf")
+ ("What's Going On - Live at The Bitter End 1971 - Donny Hathaway"
+  "spotify:track:6rH8EbNDKAcBVSumZt4BjS")
+ ("What's Going on - Donny Hathaway" "spotify:track:2a5BsZ1G86eXinBDZKQwcb")
+ ("What's Going on - Live - Donny Hathaway"
+  "spotify:track:0Zl9JewcleSt4q00exb3IQ")
+ ("What's Going On - Donny Hathaway" "spotify:track:2bWJgSuDoQ4XZQ8Np9ndZG")
+ ("What's Going on - Live - Donny Hathaway"
+  "spotify:track:2DHL1p9HwtrnJhi3DNvWyJ")
+ ("What's Going On - Donny Hathaway" "spotify:track:3rCeB1IjyIE6mjaWG6Bz4g")
+ ("What's Going On - Donny Hathaway" "spotify:track:48MhBWZoEpUIaZ77FVSUoG")
+ ("What's Going On - Donny Hathaway" "spotify:track:7M1kJJOolgBANDDVFsRNlK")
+ ("What's Going On - Donny Hathaway" "spotify:track:4lIVgpSdPyM0vX16EYNCYH")
+ ("What's Going On - Donny Hathaway" "spotify:track:6MLUOGE1UQCAXRre5CR0Ny"))
 ```
