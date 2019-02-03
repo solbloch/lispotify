@@ -19,7 +19,7 @@ it should just run from then
 then use whatever `(search-track "dfj")` and parse it (it gives back a list of jsown objects that are tracks, refer to the [spotify api details](https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-tracks/)).
 
 ```
-(loop for i in (lispotify:search-track "something")
+(loop for i in (lispotify:search-track "what's going on donny hathaway")
       collecting
       `(,(concatenate 'string (jsown:val i "name") " - "
                       (format nil "~{~a~^ & ~}"
