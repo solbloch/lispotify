@@ -9,6 +9,8 @@
                              "https://api.spotify.com/v1/search?q="
                              (quri:url-encode name)
                              "&type=track"))
-           (raw-results (dex:get uri
-                                 :headers `(("Authorization" . ,*access-token*)))))
+           (raw-results (handler-case
+                            (dex:get uri :headers `(("Authorization" . ,*access-token*)))
+                          (dex:http-request-failed (e)
+                            (format nil "~a" e)))))
       (val (val (parse raw-results) "tracks") "items"))))
