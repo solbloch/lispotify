@@ -1,4 +1,6 @@
 (defpackage #:lispotify
-  (:use #:cl
-        #:jsown
-        #:cl-ppcre))
+  (:use
+   #:cl-base64
+   #:cl
+   #:jsown
+   #:cl-ppcre))
