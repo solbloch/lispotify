@@ -24,13 +24,13 @@
 
 (defun renew-token ()
   "grabs a new token and sets *token* and *access-token*"
-  (progn (setf *token*
-               (get-token))
-         (setf *access-token* (concatenate 'string "Bearer " (val *token* "access_token")))))
+  (setf *token* (get-token))
+  (setf *access-token* (concatenate 'string "Bearer "
+                                    (val *token* "access_token"))))
 
 (defmacro with-token (&body body)
   "makes sure that you have a non-expired token"
-  `(if (> (get-universal-time) (val *token* "exp-time"))
+  `(if (> (get-universal-time) (jsown:val *token* "exp-time"))
        (progn (renew-token)
               ,@body)
        ,@body))
