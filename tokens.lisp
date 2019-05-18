@@ -8,11 +8,9 @@
 (defun get-token ()
   "get a token and add 'exp-time' with the universal-time corresponding to the exp-time"
   (extend-js (parse
-              (let ((retry-request (dex:retry-request 5 :interval 3)))
-                (handler-bind ((dex:http-request-failed retry-request))
-                  (dex:post "https://accounts.spotify.com/api/token"
-                              :content '(("grant_type" . "client_credentials"))
-                              :headers `(("Authorization" . ,*authorization*))))))
+              (dex:post "https://accounts.spotify.com/api/token"
+                        :content '(("grant_type" . "client_credentials"))
+                        :headers `(("Authorization" . ,*authorization*))))
     ("exp-time" (+ 3600 (get-universal-time)))))
 
 (defvar *authorization*
@@ -22,7 +20,7 @@
 
 (defvar *token* nil)
 
-(defvar *access-token* (concatenate 'string "Bearer " (val *token* "access_token")))
+(defvar *access-token* nil)
 
 (defun renew-token ()
   "grabs a new token and sets *token* and *access-token*"
