@@ -7,9 +7,12 @@
 
 (defun get-token ()
   "get a token and add 'exp-time' with the universal-time corresponding to the exp-time"
-  (extend-js (parse (dex:post "https://accounts.spotify.com/api/token"
+  (extend-js (parse
+              (let ((retry-request (dex:retry-request 5 :interval 3)))
+                (handler-bind ((dex:http-request-failed retry-request))
+                  (dex:post "https://accounts.spotify.com/api/token"
                               :content '(("grant_type" . "client_credentials"))
-                              :headers `(("Authorization" . ,*authorization*))))
+                              :headers `(("Authorization" . ,*authorization*))))))
     ("exp-time" (+ 3600 (get-universal-time)))))
 
 (defvar *authorization*
@@ -17,8 +20,7 @@
                           (concatenate 'string *client-id* ":" *client-secret*))))
     (concatenate 'string "Basic " base-64-encoded)))
 
-(defvar *token*
-  (get-token))
+(defvar *token* nil)
 
 (defvar *access-token* (concatenate 'string "Bearer " (val *token* "access_token")))
 
@@ -30,7 +32,7 @@
 
 (defmacro with-token (&body body)
   "makes sure that you have a non-expired token"
-  `(if (> (get-universal-time) (jsown:val *token* "exp-time"))
+  `(if (or (null *token*) (> (get-universal-time) (jsown:val *token* "exp-time")))
        (progn (renew-token)
               ,@body)
        ,@body))
