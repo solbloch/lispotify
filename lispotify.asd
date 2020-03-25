@@ -10,7 +10,4 @@
                #:cl-base64
                #:cl-ppcre)
   :components ((:file "package")
-               (:file "id")
-               (:file "tokens")
-               (:file "lispotify")
-               (:file "dbus")))
+               (:file "oauth")))
