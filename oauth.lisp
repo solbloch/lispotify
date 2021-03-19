@@ -2,11 +2,13 @@
 
 (export '(spotify-oauth
           make-spotify-oauth
+          base64-encoded
           with-token
           refresh-token
           get-code-web
           get-token
-          token))
+          token
+          spotify-api-request))
 
 (defclass spotify-oauth ()
   ((id
@@ -30,6 +32,8 @@
    (token
     :accessor token
     :initarg :token)))
+
+(defvar *spotify-api* "https://api.spotify.com/v1/")
 
 (defmethod write-token ((oauth spotify-oauth))
   (let ((json-token (to-json (token oauth))))
@@ -91,3 +95,15 @@
          (progn (refresh-token ,oauth)
                 ,@body)
          ,@body)))
+
+(defmethod authorization-header ((oauth spotify-oauth) &key headers)
+  (let ((access-token (jsown:val (token oauth) "access_token")))
+    (append `(("Authorization" . ,(format nil "Bearer ~a" access-token)))
+            headers)))
+
+(defmethod spotify-api-request ((oauth spotify-oauth) api &key (method :get) headers content)
+  (with-token oauth
+    (dex:request (concatenate 'string *spotify-api* api)
+                 :headers (authorization-header oauth)
+                 :content content
+                 :method method)))
